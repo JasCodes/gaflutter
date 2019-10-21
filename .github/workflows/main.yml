@@ -15,8 +15,10 @@ jobs:
         channel: 'dev'
     - run: flutter pub get
     - run: flutter build appbundle
+    - run: mv build/app/outputs/bundle/release/app-release.aab ./app.aab
+    - run: ls -la
     - uses: JasonEtco/upload-to-release@master
       with:
-        args: build/app/outputs/bundle/release/app-release.aab application/octet-stream
+        args: app.aab application/octet-stream
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
